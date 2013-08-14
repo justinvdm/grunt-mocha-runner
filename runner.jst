@@ -1,0 +1,33 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title><%= options.title %></title>
+
+    <link rel="stylesheet" href="/mocha.css">
+
+    <% paths.styles.forEach(function(style) { %>
+        <link rel="stylesheet" href="<%= paths.style %>">
+    <% }); %>
+</head>
+<body>
+    <div id="mocha"></div>
+    <script src="/mocha.js"></script>
+    <script src="/chai.js"></script>
+
+    <script>
+        mocha.setup("<%= options.ui %>");
+        window.expect = chai.expect
+    </script>
+
+    <% paths.src.forEach(function(script) { %>
+        <script src="<%= script %>"></script>
+    <% }); %>
+
+    <% paths.spec.forEach(function(script) { %>
+        <script src="<%= script %>"></script>
+    <% }); %>
+
+    <script>mocha.run()</script>
+</body>
+</html>

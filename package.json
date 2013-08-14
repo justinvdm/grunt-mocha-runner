@@ -1,0 +1,34 @@
+{
+  "name": "grunt-mocha-browser",
+  "description": "Simple wrapper for grunt-mocha for specifying your source and test paths in your Gruntfile",
+  "version": "0.0.0",
+  "homepage": "",
+  "author": {
+    "name": "justinvdm"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "dependencies": {
+    "connect": "~2.8.5",
+    "tmp": "0.0.21"
+  }
+}
