@@ -4,22 +4,24 @@ module.exports = function(grunt) {
       tmp = require('tmp'),
       fs = require('fs');
 
-  var linkInDir = function(srcpath, dirpath) {
+  function linkInDir(srcpath, dirpath) {
     var destpath = path.join(dirpath, path.basename(srcpath));
-    fs.symlinkSync(srcpath, destpath);
-    return destpath;
-  };
+    fs.symlinkSync(path.resolve(srcpath), destpath);
+  }
 
-  var buildDir = function(dirname, rootpath, filepaths) {
+  function buildDir(dirname, rootpath, filepaths) {
     var dirpath = path.join(rootpath, dirname);
     fs.mkdirSync(dirpath);
 
     return grunt.file
       .expand(filepaths || [])
-      .map(function(srcpath) { return linkInDir(srcpath, dirpath); });
-  };
+      .map(function(srcpath) {
+        linkInDir(srcpath, dirpath);
+        return path.join('/', dirname, path.basename(srcpath));
+      });
+  }
 
-  var buildRunner = function(dirpath, data) {
+  function buildRunner(dirpath, data) {
     var jst = fs.readFileSync(
       path.join(__dirname, '..', 'runner.jst'),
       {encoding: 'utf8'});
@@ -27,7 +29,7 @@ module.exports = function(grunt) {
     fs.writeFileSync(
       path.join(dirpath, 'index.html'),
       grunt.template.process(jst, {data: data}));
-  };
+  }
 
   grunt.registerMultiTask(
   'mochaRunner',
