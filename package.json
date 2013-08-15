@@ -1,7 +1,7 @@
 {
   "name": "grunt-mocha-browser",
   "description": "Serve a mocha runner page with the source and spec script paths configured in your Gruntfile",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "",
   "author": {
     "name": "justinvdm"
