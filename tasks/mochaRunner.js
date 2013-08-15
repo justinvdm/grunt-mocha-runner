@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 
   function buildRunner(dirpath, data) {
     var jst = fs.readFileSync(
-      path.join(__dirname, '..', 'runner.jst'),
+      path.join(__dirname, 'runner.jst'),
       {encoding: 'utf8'});
 
     fs.writeFileSync(
@@ -48,11 +48,11 @@ module.exports = function(grunt) {
     var done = this.async();
 
     tmp.dir(function(err, dirpath) { 
-      var bowerDir = path.resolve(__dirname, '..', 'bower_components');
+      var modulesDir = path.resolve(__dirname, '..', 'node_modules');
 
-      linkInDir(path.join(bowerDir, 'chai', 'chai.js'), dirpath);
-      linkInDir(path.join(bowerDir, 'mocha', 'mocha.js'), dirpath);
-      linkInDir(path.join(bowerDir, 'mocha', 'mocha.css'), dirpath);
+      linkInDir(path.join(modulesDir, 'chai', 'chai.js'), dirpath);
+      linkInDir(path.join(modulesDir, 'mocha', 'mocha.js'), dirpath);
+      linkInDir(path.join(modulesDir, 'mocha', 'mocha.css'), dirpath);
 
       buildRunner(dirpath, {
        options: options,
