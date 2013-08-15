@@ -1,6 +1,6 @@
 {
   "name": "grunt-mocha-browser",
-  "description": "Simple wrapper for grunt-mocha for specifying your source and test paths in your Gruntfile",
+  "description": "Serve a mocha runner page with the source and spec script paths configured in your Gruntfile",
   "version": "0.0.0",
   "homepage": "",
   "author": {
@@ -26,7 +26,10 @@
     "grunt": "~0.4.1"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "mocha",
+    "test",
+    "browser"
   ],
   "dependencies": {
     "connect": "~2.8.5",
