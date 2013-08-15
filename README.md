@@ -1,6 +1,6 @@
 # grunt-mocha-browser
 
-> Simple wrapper for grunt-mocha for specifying your source and test paths in your Gruntfile
+Serve a mocha runner page with the source and spec script paths configured in your Gruntfile.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -17,19 +17,18 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-mocha-browser');
 ```
 
-## The "mocha_browser" task
+## The "mochaBrowser" task
 
 ### Overview
-In your project's Gruntfile, add a section named `mocha_browser` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `mochaBrowser` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  mocha_browser: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
+  mochaBrowser: {
+    all: {
+      src: ['src/*.js'],
+      spec: ['test/spec/*.js'],
+      styles: ['styles/*.css']
     },
   },
 })
@@ -37,53 +36,28 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### port
+Type: `Integer`
+Default value: `8000`
+
+The port on which to serve the test runner. 
+
+#### hostname
 Type: `String`
-Default value: `',  '`
+Default: `'localhost'`
 
-A string value that is used to do something with whatever.
+The hostname on which to serve the test runner. 
 
-#### options.punctuation
+Setting it to `'*'` will make the it accessible from anywhere.
+
+#### title
 Type: `String`
-Default value: `'.'`
+Default: `'Mocha Spec Runner'`
 
-A string value that is used to do something else with whatever else.
+The title of the test runner page.
 
-### Usage Examples
+#### ui
+Type: `String`
+Default: `'bdd'`
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  mocha_browser: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  mocha_browser: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_
+The mocha ui type to use with `mocha.setup()`.
