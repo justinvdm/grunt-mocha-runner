@@ -1,10 +1,15 @@
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Load the plugin's tasks
   grunt.loadTasks('tasks');
 
   grunt.initConfig({
+    jshint: {
+        options: {jshintrc: '.jshintrc'},
+        all: ['Gruntfile.js', 'tasks/*.js', 'test/tasks/*.test.js']
+    },
     // the plugin's task to be run, then tested
     mochaRunner: {
       defaults: {
@@ -30,6 +35,13 @@ module.exports = function(grunt) {
   });
 
   // Run the plugin's tasks, then test the result
-  grunt.registerTask('test', ['mochaRunner', 'mochaTest']);
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('test', [
+    'mochaRunner',
+    'mochaTest'
+  ]);
+
+  grunt.registerTask('default', [
+    'jshint',
+    'test'
+  ]);
 };
