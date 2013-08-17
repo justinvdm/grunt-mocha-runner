@@ -17,7 +17,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-mocha-runner');
 ```
 
-## The "mochaRunner" task
+## The mochaRunner task
 
 ### Overview
 In your project's Gruntfile, add a section named `mochaRunner` to the data object passed into `grunt.initConfig()`.
@@ -61,3 +61,49 @@ Type: `String`
 Default: `'bdd'`
 
 The mocha ui type to use with `mocha.setup()`.
+
+## Usage example
+
+The mochaRunner task builds and serves the mocha test runner page, but doesn't handle the actual opening of the page to run the tests. For that, we need an additional grunt task. [grunt-mocha](https://github.com/kmiyashiro/grunt-mocha) works really well for this. Here is a basic Gruntfile example showing grunt-mocha and grunt-mocha-runner being used together:
+
+```javascript
+module.exports = function (grunt) {
+  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-mocha-runner');
+
+  grunt.initConfig({
+    // serves the runner page
+    mochaRunner: {
+      all: {
+        src: ['app/scripts/**/*.js'],
+        spec: ['test/app/spec/**/*.js']
+      }
+    },
+    // opens the runner page to run the tests
+    mocha: {
+      options: {
+        run: true,
+        reporter: 'Spec',
+      },
+      test: {
+        options: {
+          // url to the runner page served by mochaRunner
+          urls: ['http://localhost:8000']
+        }
+      }
+    }
+  });
+
+  grunt.registerTask('test', [
+    'mochaRunner',
+    'mocha'
+  ]);
+};
+```
+
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using: 
+
+```
+$ grunt
+```
