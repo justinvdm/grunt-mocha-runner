@@ -20,11 +20,7 @@
         window.expect = chai.expect
     </script>
 
-    <% paths.src.forEach(function(script) { %>
-        <script src="<%= script %>"></script>
-    <% }); %>
-
-    <% paths.spec.forEach(function(script) { %>
+    <% paths.scripts.forEach(function(script) { %>
         <script src="<%= script %>"></script>
     <% }); %>
 

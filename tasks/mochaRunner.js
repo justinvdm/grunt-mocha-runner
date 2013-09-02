@@ -9,15 +9,11 @@ module.exports = function(grunt) {
     fs.symlinkSync(path.resolve(srcpath), destpath);
   }
 
-  function buildDir(dirname, rootpath, filepaths) {
-    var dirpath = path.join(rootpath, dirname);
-    fs.mkdirSync(dirpath);
-
+  function staticPaths(filepaths) {
     return grunt.file
-      .expand(filepaths || [])
-      .map(function(srcpath) {
-        linkInDir(srcpath, dirpath);
-        return path.join('/', dirname, path.basename(srcpath));
+      .expand(filepaths)
+      .map(function(p) {
+        return path.join('/', path.basename(process.env.PWD), p);
       });
   }
 
@@ -53,13 +49,16 @@ module.exports = function(grunt) {
       linkInDir(path.join(modulesDir, 'chai', 'chai.js'), dirpath);
       linkInDir(path.join(modulesDir, 'mocha', 'mocha.js'), dirpath);
       linkInDir(path.join(modulesDir, 'mocha', 'mocha.css'), dirpath);
+      linkInDir(process.env.PWD, dirpath);
+
+      // NOTE: 'src' and 'spec' are deprecated and will be removed in v1.0.0
+      data.scripts = (data.scripts || []).concat(data.src || [], data.spec || []);
 
       buildRunner(dirpath, {
        options: options,
        paths: {
-         styles: buildDir('styles', dirpath, data.styles),
-         src: buildDir('src', dirpath, data.src),
-         spec: buildDir('spec', dirpath, data.spec)
+         styles: staticPaths(data.styles || []),
+         scripts: staticPaths(data.scripts)
        }
       });
 
