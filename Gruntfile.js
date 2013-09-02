@@ -14,7 +14,9 @@ module.exports = function(grunt) {
     // the plugin's task to be run, then tested
     mochaRunner: {
       defaults: {
-        scripts: ['test/fixtures/src/*.js', 'test/fixtures/spec/*.js'],
+        scripts: [
+          'test/fixtures/src/*.js',
+          'test/fixtures/spec/*.js'],
         styles: ['test/fixtures/styles/*.css']
       },
       custom: {
@@ -23,9 +25,10 @@ module.exports = function(grunt) {
           title: "Foo Bar",
           ui: "tdd"
         },
-        src: ['<%= mochaRunner.defaults.src =>'],
-        spec: ['<%= mochaRunner.defaults.spec =>'],
-        styles: ['<%= mochaRunner.defaults.styles =>'],
+        scripts: [
+          'test/fixtures/src/*.js',
+          'test/fixtures/spec/*.js'],
+        styles: ['test/fixtures/styles/*.css']
       }
     },
 
