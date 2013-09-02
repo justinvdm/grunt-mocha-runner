@@ -10,11 +10,13 @@ module.exports = function(grunt) {
         options: {jshintrc: '.jshintrc'},
         all: ['Gruntfile.js', 'tasks/*.js', 'test/tasks/*.test.js']
     },
+
     // the plugin's task to be run, then tested
     mochaRunner: {
       defaults: {
-        src: ['test/fixtures/src/*.js'],
-        spec: ['test/fixtures/spec/*.js'],
+        scripts: [
+          'test/fixtures/src/*.js',
+          'test/fixtures/spec/*.js'],
         styles: ['test/fixtures/styles/*.css']
       },
       custom: {
@@ -23,11 +25,13 @@ module.exports = function(grunt) {
           title: "Foo Bar",
           ui: "tdd"
         },
-        src: ['<%= mochaRunner.defaults.src =>'],
-        spec: ['<%= mochaRunner.defaults.spec =>'],
-        styles: ['<%= mochaRunner.defaults.styles =>'],
+        scripts: [
+          'test/fixtures/src/*.js',
+          'test/fixtures/spec/*.js'],
+        styles: ['test/fixtures/styles/*.css']
       }
     },
+
     // an external plugin we use to run our tests
     mochaTest: {
       test: {src: ['test/tasks/mochaRunner.test.js']}

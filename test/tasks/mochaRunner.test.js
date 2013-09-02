@@ -22,15 +22,27 @@ describe("mochaRunner", function() {
 
   it("should serve a runner page", function(done) {
     get("http://localhost:8000", function(res) {
-      expect(res).to.include('<link rel="stylesheet" href="/styles/a.css">');
-      expect(res).to.include('<link rel="stylesheet" href="/styles/b.css">');
+      expect(res).to.include('<script src="/chai.js"></script>');
+      expect(res).to.include('<script src="/mocha.js"></script>');
+      expect(res).to.include('<link rel="stylesheet" href="/mocha.css">');
 
-      expect(res).to.include('<script src="/src/a.js"></script>');
-      expect(res).to.include('<script src="/src/b.js"></script>');
+      //console.log(res);
 
-      expect(res).to.include('<script src="/spec/a.test.js"></script>');
-      expect(res).to.include('<script src="/spec/b.test.js"></script>');
-        
+      expect(res).to.include(
+        '<link rel="stylesheet" href="/grunt-mocha-runner/test/fixtures/styles/a.css">');
+      expect(res).to.include(
+        '<link rel="stylesheet" href="/grunt-mocha-runner/test/fixtures/styles/b.css">');
+
+      expect(res).to.include(
+        '<script src="/grunt-mocha-runner/test/fixtures/src/a.js"></script>');
+      expect(res).to.include(
+        '<script src="/grunt-mocha-runner/test/fixtures/src/b.js"></script>');
+
+      expect(res).to.include(
+        '<script src="/grunt-mocha-runner/test/fixtures/spec/a.test.js"></script>');
+      expect(res).to.include(
+        '<script src="/grunt-mocha-runner/test/fixtures/spec/b.test.js"></script>');
+
       done();
     });
   });
@@ -38,40 +50,42 @@ describe("mochaRunner", function() {
   it("should serve the configured stylesheets", function(done) {
     var i = 2;
 
-    get("http://localhost:8000/styles/a.css", function(res) {
+    get("http://localhost:8000/grunt-mocha-runner/test/fixtures/styles/a.css",
+    function(res) {
       expect(res).to.equal('/* a.css */\n');
       --i || done();
     });
 
-    get("http://localhost:8000/styles/b.css", function(res) {
+    get("http://localhost:8000/grunt-mocha-runner/test/fixtures/styles/b.css",
+    function(res) {
       expect(res).to.equal('/* b.css */\n');
       --i || done();
     });
   });
 
   it("should serve the configured source scripts", function(done) {
-    var i = 2;
+    var i = 4;
 
-    get("http://localhost:8000/src/a.js", function(res) {
+    get("http://localhost:8000/grunt-mocha-runner/test/fixtures/src/a.js",
+    function(res) {
       expect(res).to.equal('// a.js\n');
       --i || done();
     });
 
-    get("http://localhost:8000/src/b.js", function(res) {
+    get("http://localhost:8000/grunt-mocha-runner/test/fixtures/src/b.js",
+    function(res) {
       expect(res).to.equal('// b.js\n');
       --i || done();
     });
-  });
 
-  it("should serve the configured spec scripts", function(done) {
-    var i = 2;
-
-    get("http://localhost:8000/spec/a.test.js", function(res) {
+    get("http://localhost:8000/grunt-mocha-runner/test/fixtures/spec/a.test.js",
+    function(res) {
       expect(res).to.equal('// a.test.js\n');
       --i || done();
     });
 
-    get("http://localhost:8000/spec/b.test.js", function(res) {
+    get("http://localhost:8000/grunt-mocha-runner/test/fixtures/spec/b.test.js",
+    function(res) {
       expect(res).to.equal('// b.test.js\n');
       --i || done();
     });
