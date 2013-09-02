@@ -26,8 +26,9 @@ In your project's Gruntfile, add a section named `mochaRunner` to the data objec
 grunt.initConfig({
   mochaRunner: {
     all: {
-      src: ['src/*.js'],
-      spec: ['test/spec/*.js'],
+      scripts: [
+        'src/*.js',
+        'test/spec/*.js'],
       styles: ['styles/*.css']
     },
   },
@@ -75,8 +76,9 @@ module.exports = function (grunt) {
     // serves the runner page
     mochaRunner: {
       all: {
-        src: ['app/scripts/**/*.js'],
-        spec: ['test/app/spec/**/*.js']
+        scripts: [
+          'test/app/spec/**/*.js',
+          'app/scripts/**/*.js'],
       }
     },
     // opens the runner page to run the tests
