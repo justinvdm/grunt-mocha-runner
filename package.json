@@ -2,13 +2,14 @@
   "name": "grunt-mocha-runner",
   "description": "Serve a mocha runner page with the source and spec script paths configured in your Gruntfile",
   "version": "0.2.0",
-  "homepage": "",
+  "homepage": "https://github.com/justinvdm/grunt-mocha-runner/",
+  "bugs": "https://github.com/justinvdm/grunt-mocha-runner/issues/",
   "author": {
     "name": "justinvdm"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/justinvdm/grunt-mocha-runner.git"
   },
   "license": "MIT",
   "main": "Gruntfile.js",
